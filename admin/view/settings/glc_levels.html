@@ -1,0 +1,80 @@
+<div id="page-wrapper" style="display:none">
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <!--
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Settings
+                </h1>
+            </div>
+        </div>
+        -->
+        
+        <br/><br/>
+        
+        <ul class="nav nav-tabs">
+            <!--
+            <li role="presentation">
+                <a href="#manage-users">Manage Users</a>
+            </li>
+            -->
+            <li role="presentation">
+                <a href="#schedule-of-services">Schedule of Services</a>
+            </li>
+            
+            <li role="presentation" class="active">
+                <a  href="#glc-levels">GLC Levels</a>
+            </li>
+            
+            <li role="presentation">
+                <a  href="#dgroup-type">DGroup Type</a>
+            </li>
+        </ul>
+
+        <div class="col-lg-12"><br/><br/></div>
+        
+        <div class="col-md-12" id="result_msg" ng-show="display_result">
+            <div ng-class="{'alert alert-success': success, 'alert alert-danger': failed}">
+                {{result_msg}} 
+            </div>
+        </div>
+        
+        <form method="POST" ng-submit="saveList()">
+            <div class="row">
+
+                <div class="col-lg-12"><br/></div>
+
+                <div class="col-lg-1"></div>
+
+                <div class="col-lg-8">
+                    <div class="row form-group glc_level_list" ng-repeat="val in glc_level_list" id="glc_level_{{$index}}">
+                        <div class="col-lg-8">
+                            <input type="text" id="glc_level_name_{{$index}}" value="{{val.glc_level_name}}" class="form-control glc_level_id_{{val.glc_level_id}}">
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="button" class="btn btn-sm btn-primary" ng-click="addRow();" style="min-width:70px; margin-top:2px;">Add</button>
+                            <button type="button" id="{{$index}}" class="btn btn-sm btn-danger" ng-click="removeRow($event)" style="min-width:70px; margin-top:2px;">Remove</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3"></div>
+                
+                <div class="col-lg-12"><br/><br/></div>
+
+                <div class="col-lg-12 text-center">
+                    <input type="submit" class="btn btn-success btn-lg" value="Save Changes">
+                </div>
+
+                <div class="col-lg-12"><br/></div>
+
+            </div>
+        </form>
+        
+
+    </div>
+
+</div>

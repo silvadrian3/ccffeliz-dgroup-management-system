@@ -1,0 +1,235 @@
+<div id="page-wrapper" style="display:none">
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Add First Timer
+                </h1>
+            </div>
+        </div>
+
+        <div class="col-md-12" id="result_msg" ng-show="display_result">
+            <div ng-class="{'alert alert-success': success, 'alert alert-danger': failed}">
+                {{result_msg}} 
+            </div>
+        </div>
+
+        <!--
+        <div class="alert alert-info alert-dismissible">
+            <span class="close" data-dismiss="alert" aria-label="close">&times;</span>
+            <i class="fa fa-info-circle"></i> Discribe this page and give the user an idea on how to use it. <strong><a href="video.url">Click here (Video Tutorial)</a></strong>
+        </div>
+        -->
+
+    <form method="POST" ng-submit="addMember()">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="row">
+                    <div class="col-lg-12"><br/></div>
+
+                    <div class="col-lg-1"></div>
+
+                    <div class="col-lg-10">
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">First Name <span>*</span></p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <!--<input type="text" id="firstname" ng-model="firstname" class="form-control" required ng-blur="checkPartnerExst()">-->
+                                <input type="text" ng-model="firstname" id="firstname" class="form-control" required ng-blur="checkName()" />
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Last Name <span>*</span></p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" ng-model="lastname" id="lastname" class="form-control" required ng-blur="checkName()" />
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Middle Name</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" ng-model="middlename" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Date of Birth</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" ng-model="birthday" id="birthday" class="form-control date_picker" placeholder="mm/dd/yyyy">
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12" style="display:none">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Age</p>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input type="text" ng-model="age" class="form-control" onkeypress="validateNumber(event)">
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p>Gender</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="radio" name="gender" ng-model="gender" value="M" /> Male <br/>
+                                <input type="radio" name="gender" ng-model="gender" value="F" /> Female
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Civil Status</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select ng-model="civilstatus" class="form-control">
+                                    <option value=""> - - - Please Select - - - </option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Singe Parent">Single Parent</option>
+                                    <option value="Widowed">Widowed</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Occupation</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" ng-model="occupation" class="form-control" />
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-12">
+                                <hr/>
+                                <label>Contact Details</label>
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Contact Number</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" ng-model="contactnumber" class="form-control" onkeypress="validateContact(event)">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Email Address </p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" ng-model="email" class="form-control">
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Address</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <textarea ng-model="address" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <hr/>
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Date Registered</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" ng-model="date_registered" id="date_registered" class="form-control date_picker" placeholder="mm/dd/yyyy">
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Service Attended</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select ng-model="service_attended" class="form-control">
+                                    <option value=""> - - - Please Select - - - </option>
+                                    <option ng-repeat="val in service_list" value="{{val.service_id}}"> {{val.service_name}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Preferred Day</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select ng-model="preferred_day" class="form-control">
+                                    <option value=""> - - - Please Select - - - </option>
+                                    <option value="Sunday">Sunday</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+
+                    <div class="col-lg-1"></div>
+
+                    <div class="col-lg-12"><br/><br/></div>
+
+                    <div class="col-lg-12 text-center">
+                        <div class="col-lg-4"></div>
+
+                        <div class="col-lg-2">
+                            <input type="button" class="btn btn-warning btn-lg btn-block" value="Back to List" ng-click="gotoList()">
+                        </div>
+
+                        <div class="col-lg-2">
+                            <input type="submit" id="btn_save" class="btn btn-success btn-lg btn-block" value="Save">
+                        </div>
+                        <div class="col-lg-4"></div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-12"><br/><br/></div>
+
+                <!--
+                <div class="col-md-12" id="result_msg" ng-show="display_result">
+                    <div ng-class="{'alert alert-success': success, 'alert alert-danger': failed}">
+                        {{result_msg}} 
+                    </div>
+                </div>
+                -->
+
+                <div class="col-lg-12"><br/></div>
+            </div>
+        </div>
+    </form>
+        <!-- /.row -->
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+$('.date_picker').datetimepicker({timepicker: false, format: 'm/d/Y', scrollMonth:false, scrollInput:false, validateOnBlur:false});
+</script>

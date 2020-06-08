@@ -1,0 +1,242 @@
+<div id="page-wrapper" style="display:none">
+<!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">-->
+<link href="../assets/css/dataTables.bootstrap.css" rel="stylesheet">
+        
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Reports
+                    </h1>
+                </div>
+            </div>
+        
+        <ul class="nav nav-tabs">
+            <li role="presentation">
+                <a href="#reports/members">Members</a>
+            </li>
+            <li role="presentation" class="active">
+                <a href="javascript:void(0)">First Timers</a>
+            </li>
+            
+        </ul>
+        
+					
+        <form method="POST">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row" id="section-user-info">
+                        <div class="col-lg-12"><br/></div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group form-inline">     
+                                
+                                <input type="checkbox" id="chkpending" checked> <span class="text-warning">Pending</span> &nbsp;
+                                <input type="checkbox" id="chkinvited" checked> <span class="text-info"><!--Invitation Sent-->Not Interested</span> &nbsp;
+                                <input type="checkbox" id="chkfollowup" checked> <span class="text-danger">For Follow-up</span> &nbsp;
+                                <input type="checkbox" id="chkplaced" checked> <span class="text-success">Placed DGroup</span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 row form-group">
+                            <div class="col-md-3">
+                                <label>Gender</label> &nbsp;
+                            </div>
+                            <div class="col-md-5">
+                                <input type="radio" name="gender" value="M" /> Male  &nbsp;
+                                <input type="radio" name="gender" value="F" /> Female
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12"></div>
+                        
+                        <div class="col-lg-6 row form-group">
+                            <div class="col-md-3">
+                                <label class="top-space">Civil Status</label> &nbsp;
+                            </div>
+                            <div class="col-md-5">
+                                <select id="civilstatus" class="form-control">
+                                    <option value=""> - - - Please Select - - - </option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Maried</option>
+                                    <option value="Singe Parent">Single Parent</option>
+                                    <option value="Widowed">Widowed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-12"></div>
+                        
+                        <div class="col-lg-6 row form-group">
+                            <div class="col-md-12">
+                                <input type="checkbox" id="showAdvanced"> Show Advanced Search
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12"></div>
+                        
+                        <div class="col-lg-6 row form-group" id="div_date_registered" style="display:none">
+                            <div class="col-lg-3">
+                                <label class="top-space">Date Registered</label> &nbsp;
+                            </div>
+                            
+                            <div class="col-lg-9">
+                            <div class="input-group form-inline">
+                                <span class="input-group-addon">Start Date</span>
+                                <input type="text" id="startdateregistered" class="form-control date_picker" placeholder="mm/dd/yyyy">
+                                
+                                <span class="input-group-addon">End Date</span>
+                                <input type="text" id="enddateregistered" class="form-control date_picker" placeholder="mm/dd/yyyy">
+                            </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12"></div>
+                        
+                        <div class="col-lg-6 row form-group" id="div_preferred_day" style="display:none">
+                            <div class="col-lg-3">
+                                <label class="top-space">Preferred Day</label> &nbsp;
+                            </div>
+                            <div class="col-lg-5">
+                                <select id="preferred_day" class="form-control">
+                                    <option value=""> - - - Please Select - - - </option>
+                                    <option value="Sunday">Sunday</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12"></div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group row col-md-3">
+                                <input type="button" name="search" class="btn btn-info" ng-click="search()" value="Search" style="width:100px">
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12"><br/></div>
+
+                        <div class="col-lg-12 custom_tbl" id="members">
+                            <table id="tbl_records" class="table table-striped table-bordered table-responsive" cellspacing="0" cellpadding="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <td class="text-center">Name</td>
+                                    <td class="text-center">Date Registered</td>
+                                    <td class="text-center">Gender</td>
+                                    <td class="text-center">Civil Status</td>
+                                    <td class="text-center">Age</td>
+                                    <td class="text-center">Contact No.</td>
+                                    <td class="text-center">Preferred Day</td>
+                                    <td class="text-center">Status</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="val in members">
+                                    <td class="c-tbl-col" nowrap>{{ val.lastname + ', ' + val.firstname }}</td>
+                                    <td class="c-tbl-col text-center" nowrap>
+                                        <span style="display:none">{{ val.date_registered }}</span>
+                                        <span ng-if="val.date_registered !== '' && val.date_registered !== '0000-00-00'">{{ val.date_registered | date : "MMM dd, yyyy" }}</span>
+                                    </td>
+                                    <td class="c-tbl-col text-center" nowrap>{{ val.gender }}</td>
+                                    <td class="c-tbl-col text-center" nowrap>{{ val.civil_status }}</td>
+                                    <td class="c-tbl-col text-center" nowrap><span ng-if="val.date_of_birth != '0000-00-00' && val.date_of_birth != ''">{{ getAge(val.date_of_birth) }}</span></td>
+                                    <td class="c-tbl-col text-center" nowrap>{{ val.contact_no }}</td>
+                                    <td class="c-tbl-col text-center" nowrap>{{ val.preferred_day }}</td>
+                                    <td class="c-tbl-col text-center" nowrap ng-class="{'text-warning': val.stage_id == '1', 'text-info': val.stage_id == '2', 'text-danger': val.stage_id == '3', 'text-success': val.stage_id == '4'}">                                    
+                                    <span ng-if="val.stage_id==1">Pending</span>
+                                    <span ng-if="val.stage_id==2"><!--Invitation Sent-->Not Interested</span>
+                                    <span ng-if="val.stage_id==3">For Follow-up</span>
+                                    <span ng-if="val.stage_id==4">Placed in DGroup</span>                                                                        
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="col-lg-12"><br/><br/></div>
+            
+                <section class="btn_export">
+                
+                <div class="col-lg-2 col-lg-offset-5 text-center">
+                    <input type="button" id="btn_export" class="btn btn-warning btn-lg btn-block" value="Export">
+                </div>
+                
+                </section>
+                <div class="col-lg-12"><br/></div>
+            </div>
+        </div>
+        </form>
+        </div>
+
+    </div>
+
+<script src="../assets/js/jquery.dataTables.min.js"></script>
+<script src="../assets/js/dataTables.bootstrap.js"></script>
+<script src="../assets/js/exportjs/xlsx.core.min.js"></script>
+<script src="../assets/js/exportjs/blob.js"></script>
+<script src="../assets/js/exportjs/filesaver.js"></script>
+<script src="../assets/js/exportjs/tableexport.js"></script>
+<script>
+    
+    
+    $('#showAdvanced').click(function (event) {
+        if (this.checked) {
+            $("#div_preferred_day").show();
+            $("#div_date_registered").show();
+            
+        } else {
+            $("#div_preferred_day").hide();
+            $("#div_date_registered").hide();
+        }
+
+    });
+    $('.date_picker').datetimepicker({timepicker: false, format: 'm/d/Y', scrollMonth:false, scrollInput:false, validateOnBlur:false});
+    
+    $("#btn_export").click(function(){
+        /**
+        var membertypefilter = "", genderfilter = "", civilstatusfilter = "",
+            gender = angular.element('input:radio[name="gender"]:checked').val(),
+            civilstat = angular.element('#civilstatus').val();
+        
+        if(angular.element("#chkd12").prop('checked') || angular.element("#chkdl").prop('checked') || angular.element("#chkdm").prop('checked')){
+            membertypefilter = "&usertype_id=";
+        
+            if(angular.element("#chkd12").prop('checked')){
+                membertypefilter += "1-";
+            }
+
+            if(angular.element("#chkdl").prop('checked')){
+                membertypefilter += "2-";
+            }
+
+            if(angular.element("#chkdm").prop('checked')){
+                membertypefilter += "3-";
+            }
+        
+            membertypefilter = membertypefilter.substring(0, membertypefilter.length-1);
+        }
+        
+        if(gender !== "" && gender !== undefined){
+            genderfilter = "&gender=" + gender;
+        }
+        
+        if(civilstat !== "" && civilstat !== undefined){
+            civilstatusfilter = "&civilstatus=" + civilstat;
+        }*/
+            
+        //$("#tbl_records").tableExport({formats: ["xlsx"], fileName: 'Delivery Report (' + startdate + ' to ' + enddate + ')'});
+        $("#tbl_records").tableExport({formats: ["xlsx"], fileName: 'List of First Timers - ' + getYmdate()});
+        $(".xlsx").click();
+        $(".xlsx_caption").remove();
+    });
+</script>

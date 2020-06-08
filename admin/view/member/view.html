@@ -1,0 +1,202 @@
+<div id="page-wrapper" style="display:none">
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Member Details
+                </h1>
+            </div>
+        </div>
+
+        <!--
+        <div class="alert alert-info alert-dismissible">
+            <span class="close" data-dismiss="alert" aria-label="close">&times;</span>
+            <i class="fa fa-info-circle"></i> Discribe this page and give the user an idea on how to use it. <strong><a href="video.url">Click here (Video Tutorial)</a></strong>
+        </div>
+        -->
+        
+    <form method="POST">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="row" id="section-user-info">
+
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10">
+
+                    <div class="col-lg-12"><br/></div>
+
+                    <div class="col-lg-12">
+                        <div class="form-group col-md-3">
+                            <p>Full Name</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ lastname + ', ' + firstname + ' ' + middlename }}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="form-group col-md-3">
+                            <p>Date of Birth</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ date_of_birth }}</p>
+                        </div>
+                    </div>
+                        
+                    <div class="col-lg-12">
+                        <div class="form-group col-md-3">
+                            <p>Age</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ age }}</p>
+                        </div>
+                    </div>
+                        
+                    <div class="col-lg-12">
+                        <div class="form-group col-md-3">
+                            <p>Gender</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ gender }}</p>
+                        </div>
+                    </div>
+                        
+                    <div class="col-lg-12">
+                        <div class="form-group col-md-3">
+                            <p>Civil Status</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ civil_status }}</p>
+                        </div>
+                    </div>
+                        
+                    <div class="col-lg-12">
+                        <div class="form-group col-md-3">
+                            <p>Occupation</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ occupation }}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <hr/>
+                        <div class="form-group col-md-12">
+                            <label>Contact Details</label>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <p>Contact Number</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ contact_no }}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="form-group col-md-3">
+                            <p>Email Address</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ email }}</p>
+                        </div>
+                    </div>
+                        
+                    <div class="col-lg-12">
+                        <div class="form-group col-md-3">
+                            <p>Address</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ address }}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <hr/>
+                        <div class="form-group col-md-3">
+                            <p>Category</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ category_name }} <span class="text-success" ng-if="potential_leader == '1'">(Potential Leader)</span></p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="form-group col-md-3">
+                            <p>D12/DGroup Leader</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ leader_name }}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="form-group col-md-3">
+                            <p>Date Joined</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ date_joined }}</p>
+                        </div>
+                    </div>
+                        
+                    <div class="col-lg-12">
+                        <div class="form-group col-md-3">
+                            <p>GLC Level</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ glc_level }}</p>
+                        </div>
+                    </div>
+                        
+                    <div class="col-lg-12" ng-show="category_id == 1 || category_id == 2">
+                        <div class="form-group col-md-3">
+                            <p>Group Type</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="plain">{{ group_type }}</p>
+                        </div>
+                    </div>
+                    <!--    
+                    <div class="col-lg-12" ng-show="potential_leader == 1">
+                        <div class="form-group col-md-3">
+                            <p>Potential Leader?</p>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p class="text-success">Yes</p>
+                        </div>
+                    </div>
+                    -->   
+                    </div>
+
+                    <div class="col-lg-1"></div>
+
+                    <div class="col-lg-12"><br/><br/><br/></div>
+
+                    <div class="col-lg-12 text-center">
+                        <div class="col-lg-4"></div>
+
+                        <div class="col-lg-2">
+                            <input type="button" class="btn btn-warning btn-lg btn-block" value="Back to List" ng-click="gotoList()">
+                        </div>
+
+                        <div class="col-lg-2">
+                            <input type="button" class="btn btn-success btn-lg btn-block" value="Update Details" ng-click="gotoUpdate()">
+                        </div>
+                        <div class="col-lg-4"></div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-12"><br/></div>
+            </div>
+        </div>
+    </form>
+        <!-- /.row -->
+
+    </div>
+
+</div>

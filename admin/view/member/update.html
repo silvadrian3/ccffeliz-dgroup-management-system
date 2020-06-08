@@ -1,0 +1,298 @@
+<div id="page-wrapper" style="display:none">
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Update Member(s)
+                </h1>
+            </div>
+        </div>
+
+        <div class="col-md-12" id="result_msg" ng-show="display_result">
+            <div ng-class="{'alert alert-success': success, 'alert alert-danger': failed}">
+                {{result_msg}} 
+            </div>
+        </div>
+
+        <!--
+        <div class="alert alert-info alert-dismissible">
+            <span class="close" data-dismiss="alert" aria-label="close">&times;</span>
+            <i class="fa fa-info-circle"></i> Discribe this page and give the user an idea on how to use it. <strong><a href="video.url">Click here (Video Tutorial)</a></strong>
+        </div>
+        -->
+
+    <form method="POST" ng-submit="updateMultipleMembers()">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="row" id="section-user-info">
+                    <div class="col-lg-12"><br/></div>
+
+                    <section ng-repeat="val in listmembers" ng-class-odd="'multipleupdate_odd'" ng-class-even="'multipleupdate_even'">
+
+                    <div class="col-lg-1"></div>
+
+                    <div class="col-lg-10">
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">First Name <span>*</span></p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" id="firstname_{{val.member_id}}" value="{{val.firstname}}" class="form-control" required />
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Last Name <span>*</span></p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" id="lastname_{{val.member_id}}" value="{{val.lastname}}" class="form-control" required />
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Middle Name</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" id="middlename_{{val.member_id}}" value="{{val.middlename}}" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Date of Birth</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" id="birthday_{{val.member_id}}" ng-if="val.date_of_birth != '0000-00-00'" class="form-control date_picker" value="{{val.date_of_birth | date : 'MM/dd/yyyy'}}" />
+                                
+                                <input type="text" id="birthday_{{val.member_id}}" ng-if="val.date_of_birth == '0000-00-00'" class="form-control date_picker" placeholder="mm/dd/yyyy" />
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12" style='display:none'>
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Age</p>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input type="text" id="age_{{val.member_id}}" value="{{val.age != 0 ? val.age : ''}}" class="form-control" onkeypress="validateNumber(event)">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p>Gender</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="radio" name="gender_{{val.member_id}}" value="M" ng-checked="val.gender == 'M'" /> Male <br/>
+                                <input type="radio" name="gender_{{val.member_id}}" value="F" ng-checked="val.gender == 'F'" /> Female
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Civil Status</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select id="civilstatus_{{val.member_id}}" class="form-control">
+                                    <option value=""> - - - Please Select - - - </option>
+                                    <option value="Single" ng-selected="val.civil_status == 'Single'">Single</option>
+                                    <option value="Married" ng-selected="val.civil_status == 'Married'">Married</option>
+                                    <option value="Singe Parent" ng-selected="val.civil_status == 'Singe Parent'">Single Parent</option>
+                                    <option value="Widowed" ng-selected="val.civil_status == 'Widowed'">Widowed</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Occupation</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" id="occupation_{{val.member_id}}" value="{{val.occupation}}" class="form-control" />
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-12">
+                                <hr/>
+                                <label>Contact Details</label>
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Contact Number</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" id="contactnumber_{{val.member_id}}" value="{{val.contact_no}}" class="form-control" onkeypress="validateContact(event)">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Email Address </p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="email" id="email_{{val.member_id}}" value="{{val.email}}" class="form-control">
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Address</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <textarea id="address_{{val.member_id}}" class="form-control" rows="3">{{val.address}}</textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <hr/>
+                            <div class="form-group col-md-3">
+                                <p>Category <span style="color:#FF0000;">*</span></p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="radio" name="dgrouptype_{{val.member_id}}" value="1" ng-checked="val.category_id == '1'" onchange="dgrouptypeChanged(this)" required /> D12 Leader <br/>
+                                <input type="radio" name="dgrouptype_{{val.member_id}}" value="2" ng-checked="val.category_id == '2'" onchange="dgrouptypeChanged(this)" required /> DGroup Leader <br/>
+                                <input type="radio" name="dgrouptype_{{val.member_id}}" value="3" ng-checked="val.category_id == '3'" onchange="dgrouptypeChanged(this)" required /> DGroup Member
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">D12/DGroup Leader </p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" id="dgleader_{{val.member_id}}" class="form-control" value="{{ (val.leader_firstname + ' ' + val.leader_lastname).trim() }}" list="dgleaderlist">
+                                <datalist id="dgleaderlist">
+                                    <option class="datalist-option" ng-repeat="eachval in dgleaders | orderBy" value="{{eachval}}"></option>
+                                </datalist>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Date Joined</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" id="date_joined_{{val.member_id}}" ng-if="val.date_joined != '0000-00-00'" class="form-control date_picker" value="{{val.date_joined | date : 'MM/dd/yyyy'}}" />
+                                
+                                <input type="text" id="date_joined_{{val.member_id}}" ng-if="val.date_joined == '0000-00-00'" class="form-control date_picker" placeholder="mm/dd/yyyy" />
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">GLC Level</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select id="glc_level_{{val.member_id}}" class="form-control">
+                                    <option value=""> - - - Please Select - - - </option>
+                                    <option ng-repeat="eachval in glc_level_list" value="{{eachval.glc_level_id}}" ng-selected="val.glc_level_id==eachval.glc_level_id"> {{eachval.glc_level_name}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12" id="sec_grouptype_{{val.member_id}}" ng-show="{{val.category_id == '1' || val.category_id == '2'}}">
+                            <div class="form-group col-md-3">
+                                <p class="top-space">Group Type</p>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <select id="handled_group_{{val.member_id}}" class="form-control">
+                                    <option value=""> - - - Please Select - - - </option>
+                                    <option ng-repeat="eachval in dgroup_type_list" value="{{eachval.group_type_id}}" ng-selected="val.grouptype_id==eachval.group_type_id"> {{eachval.group_type_name}} </option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-12" id="sec_potentialLeader_{{val.member_id}}" ng-show="{{val.category_id == '3'}}">
+                            <div class="form-group col-md-3">
+                                
+                            </div>
+                            
+                            <div class="form-group col-md-6">
+                                <input type="checkbox" ng-checked="val.potential_leader == 1" id="potential_leader_{{val.member_id}}" onchange="potentialLeaderChanged(this)"> Potential DGroup Leader    
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-lg-1"></div>
+
+                    </section>
+
+                    <div class="col-lg-12"><br/><br/></div>
+
+                    <div class="col-lg-12 text-center">
+                        <div class="col-lg-4"></div>
+
+                        <div class="col-lg-2">
+                            <input type="button" class="btn btn-danger btn-lg btn-block" value="Cancel" ng-click="gotoList()">
+                        </div>
+
+                        <div class="col-lg-2">
+                            <input type="submit" class="btn btn-success btn-lg btn-block" value="Save">
+                        </div>
+                        <div class="col-lg-4"></div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-12"><br/><br/></div>
+
+                <!--
+                <div class="col-md-12" id="result_msg" ng-show="display_result">
+                    <div ng-class="{'alert alert-success': success, 'alert alert-danger': failed}">
+                        {{result_msg}} 
+                    </div>
+                </div>
+                -->
+
+                <div class="col-lg-12"><br/></div>
+            </div>
+        </div>
+    </form>
+        <!-- /.row -->
+
+    </div>
+
+</div>
+<script>
+
+    function dgrouptypeChanged(mi){
+        var name = mi.name,
+            id = name.split('_').pop().trim();
+
+        if(mi.checked){
+
+            $("#sec_grouptype_" + id).removeClass("ng-hide");
+            $("#sec_grouptype_" + id).removeAttr("ng-show");
+
+            if(mi.value == 1 || mi.value == 2){
+                $("#sec_potentialLeader_" + id).hide();
+                $("#potential_leader_" + id).val('0');
+                $("#sec_grouptype_" + id).show();
+
+            } else {
+                $("#sec_potentialLeader_" + id).show();
+                $("#sec_grouptype_" + id).hide();
+            }
+        }
+    }
+    
+    function potentialLeaderChanged(pl){
+        
+        if(pl.checked){
+            $(pl).val('1');
+        } else {
+            $(pl).val('0');
+        }
+    }
+    
+</script>
